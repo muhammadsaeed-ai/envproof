@@ -2,9 +2,36 @@
 
 **Evidence-backed Python environment diagnostics, without uploading your project.**
 
+<p align="center">
+  <img src="assets/readme/hero.svg" alt="EnvProof — Python environment diagnostics. Capture evidence locally, compare snapshots, and investigate with actionable findings." width="100%" />
+</p>
+
+<p align="center">
+  <strong>Capture once. Compare environments. Investigate with evidence.</strong><br/>
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#visual-workflow">Visual workflow</a> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/SECURITY_MODEL.md">Security model</a>
+</p>
+
+<p align="center">
+  <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-20C997?style=flat-square" />
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" />
+  <img alt="Zero runtime dependencies" src="https://img.shields.io/badge/runtime%20dependencies-0-22A699?style=flat-square" />
+  <img alt="Local-first" src="https://img.shields.io/badge/design-local--first-3977D5?style=flat-square" />
+</p>
+
 EnvProof captures a privacy-conscious snapshot of the Python runtime and project metadata, then compares a known-good snapshot with a failing one. It highlights differences that commonly explain “works on my machine” failures and gives each finding a rule ID, observed evidence, an explanation, and a practical next step.
 
 > **Status:** first public-release candidate `0.1.0` (alpha). EnvProof is useful now, but it is not a root-cause oracle and has not yet been validated by a broad external user base.
+
+## Visual workflow
+
+<p align="center">
+  <img src="assets/readme/workflow.svg" alt="Four-step workflow: capture a known-good baseline, capture the current environment, compare snapshots, then investigate evidence-backed findings." width="100%" />
+</p>
+
+**The key idea:** compare a known-good snapshot with the incident environment, then use observed evidence and a suggested next step to guide a controlled investigation. Differences are clues—not proof of root cause.
 
 ## Why EnvProof?
 
@@ -20,6 +47,10 @@ Debugging Python environment issues often means collecting several different fac
 - Refuses to overwrite output files unless `--force` is supplied.
 
 ### Privacy by default
+
+<p align="center">
+  <img src="assets/readme/privacy.svg" alt="Privacy safeguards: environment-variable values and source contents are not captured, capture makes no network requests, and Git commit hashes are opt-in." width="100%" />
+</p>
 
 - Environment-variable **values are never captured**. For a small allowlist of diagnostic variables, EnvProof records only whether the variable is present.
 - Project source files and `.env` files are never read or copied into the snapshot.
@@ -127,6 +158,12 @@ For examples and exact field semantics, see [`docs/INSTALLATION.md`](docs/INSTAL
 
 ## Example finding
 
+<p align="center">
+  <img src="assets/readme/finding-card.svg" alt="Illustrative report card for a Python version mismatch, with high severity, baseline and current version evidence, and a recommended next step." width="100%" />
+</p>
+
+The visual card is illustrative—not a claimed run against a real third-party project. The same kind of finding is also shown below in terminal format:
+
 The following output is illustrative—not a claimed run against a real third-party project:
 
 ```text
@@ -137,6 +174,14 @@ The following output is illustrative—not a claimed run against a real third-pa
   Why it matters: Python minor versions can change syntax support, standard-library behavior, ABI compatibility and dependency resolution.
   Suggested next step: Reproduce under the same Python major/minor version before investigating subtler differences.
 ```
+
+## Architecture at a glance
+
+<p align="center">
+  <img src="assets/readme/architecture.svg" alt="EnvProof architecture: runtime and project collectors create a validated JSON snapshot, audit and comparison engines produce explainable findings, and terminal, JSON and Markdown renderers present them." width="100%" />
+</p>
+
+For component boundaries, schema decisions, input validation and output handling, see [the full architecture notes](docs/ARCHITECTURE.md).
 
 ## Design principles
 
