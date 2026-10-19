@@ -72,7 +72,8 @@ def audit_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
 
     sys_path = paths.get("sys_path", [])
     base_packages = [
-        item.get("path") for item in sys_path
+        item.get("path")
+        for item in sys_path
         if isinstance(item, dict) and item.get("kind") == "base-packages" and item.get("path")
     ]
     if python.get("is_venv") and base_packages:

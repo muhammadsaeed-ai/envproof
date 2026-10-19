@@ -24,9 +24,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=f"EnvProof {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    capture = subparsers.add_parser(
-        "capture", help="Capture a JSON snapshot of a Python environment and project."
-    )
+    capture = subparsers.add_parser("capture", help="Capture a JSON snapshot of a Python environment and project.")
     capture.add_argument(
         "project", nargs="?", default=".", help="Project directory to fingerprint (default: current directory)."
     )
@@ -43,9 +41,7 @@ def _parser() -> argparse.ArgumentParser:
     capture.add_argument("--no-git", action="store_true", help="Do not run read-only Git state checks.")
     capture.add_argument("--force", action="store_true", help="Replace the output file if it already exists.")
 
-    compare = subparsers.add_parser(
-        "compare", help="Compare a known-good baseline snapshot with a current snapshot."
-    )
+    compare = subparsers.add_parser("compare", help="Compare a known-good baseline snapshot with a current snapshot.")
     compare.add_argument("baseline", help="Known-good baseline EnvProof JSON snapshot.")
     compare.add_argument("current", help="Current or failing EnvProof JSON snapshot.")
     compare.add_argument(

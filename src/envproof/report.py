@@ -13,10 +13,7 @@ def _bullet(value: Any) -> str:
 def render_findings(findings: list[dict[str, Any]], *, title: str = "EnvProof findings") -> str:
     if not findings:
         return f"{title}\n{'=' * len(title)}\nNo diagnostic differences were found in the captured evidence.\n"
-    counts = {
-        level: sum(item.get("severity") == level for item in findings)
-        for level in ("high", "warning", "info")
-    }
+    counts = {level: sum(item.get("severity") == level for item in findings) for level in ("high", "warning", "info")}
     lines = [
         title,
         "=" * len(title),

@@ -4,14 +4,19 @@ from __future__ import annotations
 
 import os
 from collections.abc import Iterable, Mapping
+from pathlib import Path
 
 
 def _normalized(path: str) -> str:
-    """Normalize a path without requiring it to exist."""
+    """Normalize a path without requiring it to exist, resolving aliases when possible."""
+    expanded = os.path.expanduser(path)
     try:
-        return os.path.normpath(os.path.abspath(os.path.expanduser(path)))
+        return os.path.normpath(str(Path(expanded).resolve(strict=False)))
     except (OSError, RuntimeError, ValueError):
-        return os.path.normpath(path)
+        try:
+            return os.path.normpath(os.path.abspath(expanded))
+        except (OSError, RuntimeError, ValueError):
+            return os.path.normpath(expanded)
 
 
 def _is_at_or_below(path: str, base: str) -> bool:

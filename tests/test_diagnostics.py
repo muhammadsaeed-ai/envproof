@@ -24,9 +24,7 @@ class DiagnosticTests(unittest.TestCase):
 
     def test_detects_standard_library_shadowing(self) -> None:
         current = copy_snapshot()
-        current["modules"] = [
-            {"name": "json", "found": True, "origin": "$PROJECT/json.py", "origin_kind": "project"}
-        ]
+        current["modules"] = [{"name": "json", "found": True, "origin": "$PROJECT/json.py", "origin_kind": "project"}]
         codes = {item["code"] for item in audit_snapshot(current)}
         self.assertIn("STDLIB_MODULE_SHADOWED_BY_PROJECT", codes)
 

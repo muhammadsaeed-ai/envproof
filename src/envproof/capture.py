@@ -244,11 +244,7 @@ def _module_resolution(name: str, project_root: Path, roots: dict[str, str]) -> 
         origin_kind = "third-party"
     elif any(
         _is_under(str(origin), root)
-        for root in {
-            value
-            for key, value in sysconfig.get_paths().items()
-            if key in {"stdlib", "platstdlib"} and value
-        }
+        for root in {value for key, value in sysconfig.get_paths().items() if key in {"stdlib", "platstdlib"} and value}
     ):
         origin_kind = "standard-library"
     else:

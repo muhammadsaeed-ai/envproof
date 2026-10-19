@@ -63,7 +63,7 @@ class CaptureTests(unittest.TestCase):
             (project / "probe_noexec.py").write_text(
                 f"from pathlib import Path\nPath({str(marker)!r}).write_text('executed')\n", encoding="utf-8"
             )
-            with patch("envproof.capture.sys.path", [str(project), *list(__import__("sys").path)]):
+            with patch("envproof.capture.sys.path", [str(project.resolve()), *list(__import__("sys").path)]):
                 snapshot = capture_snapshot(project, modules=["probe_noexec"], include_git=False)
             result = snapshot["modules"][0]
             self.assertTrue(result["found"])
@@ -117,9 +117,10 @@ class CaptureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             inside_repo = subprocess.CompletedProcess(args=["git"], returncode=0, stdout="true\n", stderr="")
             failed_status = subprocess.CompletedProcess(args=["git"], returncode=128, stdout="", stderr="failed")
-            with patch("envproof.capture.shutil.which", return_value="/usr/bin/git"), patch(
-                "envproof.capture.subprocess.run", side_effect=[inside_repo, failed_status]
-            ) as run:
+            with (
+                patch("envproof.capture.shutil.which", return_value="/usr/bin/git"),
+                patch("envproof.capture.subprocess.run", side_effect=[inside_repo, failed_status]) as run,
+            ):
                 state = _git_state(Path(temp), include_commit=False)
 
         self.assertTrue(state["in_repo"])

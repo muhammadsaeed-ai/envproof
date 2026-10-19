@@ -12,8 +12,7 @@ class ReportTests(unittest.TestCase):
         current = copy_snapshot()
         current["environment"]["flags"]["PRIVATE_TOKEN"] = True
         current["packages"] = [
-            {"name": f"package-{index}", "version": "1.0", "location_kind": "third-party"}
-            for index in range(5)
+            {"name": f"package-{index}", "version": "1.0", "location_kind": "third-party"} for index in range(5)
         ]
         report = render_markdown_report(current, max_packages=2)
         self.assertIn("Showing 2 of 5", report)

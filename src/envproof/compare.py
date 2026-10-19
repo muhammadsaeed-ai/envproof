@@ -130,10 +130,9 @@ def compare_snapshots(left: dict[str, Any], right: dict[str, Any]) -> list[dict[
 
     left_platform = left.get("platform", {})
     right_platform = right.get("platform", {})
-    if (
-        left_platform.get("system") != right_platform.get("system")
-        or left_platform.get("machine") != right_platform.get("machine")
-    ):
+    if left_platform.get("system") != right_platform.get("system") or left_platform.get(
+        "machine"
+    ) != right_platform.get("machine"):
         findings.append(
             _finding(
                 "PLATFORM_DIFFERS",
@@ -215,9 +214,7 @@ def compare_snapshots(left: dict[str, Any], right: dict[str, Any]) -> list[dict[
     left_flags = left.get("environment", {}).get("flags", {})
     right_flags = right.get("environment", {}).get("flags", {})
     changed_flags = [
-        key
-        for key in sorted(set(left_flags) | set(right_flags))
-        if left_flags.get(key) != right_flags.get(key)
+        key for key in sorted(set(left_flags) | set(right_flags)) if left_flags.get(key) != right_flags.get(key)
     ]
     if changed_flags:
         findings.append(
@@ -330,9 +327,10 @@ def compare_snapshots(left: dict[str, Any], right: dict[str, Any]) -> list[dict[
                     f"Check the checkout, generated-file process and project root for {name}.",
                 )
             )
-        elif (
-            (a.get("status"), a.get("sha256"), a.get("size_bytes"))
-            != (b.get("status"), b.get("sha256"), b.get("size_bytes"))
+        elif (a.get("status"), a.get("sha256"), a.get("size_bytes")) != (
+            b.get("status"),
+            b.get("sha256"),
+            b.get("size_bytes"),
         ):
             lockfiles = {"uv.lock", "poetry.lock", "pdm.lock", "pipfile.lock", "pyproject.toml", "requirements.txt"}
             severity = "high" if name.lower() in lockfiles else "warning"
@@ -366,9 +364,10 @@ def compare_snapshots(left: dict[str, Any], right: dict[str, Any]) -> list[dict[
                     f"Recapture both environments with --module {name} to compare its import origin.",
                 )
             )
-        elif (
-            (a.get("found"), a.get("origin"), a.get("origin_kind"))
-            != (b.get("found"), b.get("origin"), b.get("origin_kind"))
+        elif (a.get("found"), a.get("origin"), a.get("origin_kind")) != (
+            b.get("found"),
+            b.get("origin"),
+            b.get("origin_kind"),
         ):
             findings.append(
                 _finding(
