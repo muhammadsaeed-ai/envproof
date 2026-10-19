@@ -18,6 +18,8 @@
   <a href="docs/SECURITY_MODEL.md">Security model</a>
 </p>
 
+<p align="center"><sub>Built and maintained by <a href="https://verityagent.lovable.app"><strong>VerityAgent</strong></a> · AI agents, automation, and developer tools</sub></p>
+
 <p align="center">
   <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-20C997?style=flat-square" />
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white" />
