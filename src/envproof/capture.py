@@ -17,7 +17,7 @@ import sysconfig
 from collections.abc import Iterable
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from envproof import SCHEMA_VERSION, __version__
 from envproof._output import atomic_write_text
@@ -123,7 +123,7 @@ def _distribution_inventory(project_root: Path, roots: dict[str, str]) -> list[d
                     f"The environment reports more than {MAX_DISTRIBUTIONS:,} distributions; "
                     "refusing to create an unbounded snapshot."
                 )
-            name = dist.metadata.get("Name") or "<unknown>"
+            name = dist.metadata["Name"] if "Name" in dist.metadata else "<unknown>"
             try:
                 version = dist.version
             except Exception:  # malformed installed metadata should not break diagnosis
@@ -462,7 +462,7 @@ def load_snapshot(path: str | os.PathLike[str]) -> dict[str, Any]:
     except (OSError, RecursionError, ValueError) as exc:
         raise EnvProofError(f"Cannot read valid JSON from {str(source)!r}: {exc}") from exc
     validate_snapshot(data, source)
-    return data
+    return cast(dict[str, Any], data)
 
 
 def validate_snapshot(data: Any, source: Path | None = None) -> None:

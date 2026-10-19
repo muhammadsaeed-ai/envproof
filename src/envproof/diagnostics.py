@@ -87,7 +87,7 @@ def audit_snapshot(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
         )
 
     modules = snapshot.get("modules", [])
-    stdlib_names = getattr(sys, "stdlib_module_names", frozenset())
+    stdlib_names: frozenset[str] = getattr(sys, "stdlib_module_names", frozenset())
     for module in modules:
         if not isinstance(module, dict) or not module.get("found"):
             continue
