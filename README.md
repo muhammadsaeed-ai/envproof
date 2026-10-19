@@ -7,6 +7,10 @@
 </p>
 
 <p align="center">
+  <img src="assets/readme/progress-loop.gif" alt="Animated workflow indicator for envproof." width="420" />
+</p>
+
+<p align="center">
   <strong>Capture once. Compare environments. Investigate with evidence.</strong><br/>
   <a href="#quick-start">Quick start</a> ·
   <a href="#visual-workflow">Visual workflow</a> ·
