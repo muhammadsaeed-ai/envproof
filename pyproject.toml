@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "envproof"
+version = "0.1.0"
+description = "Privacy-conscious Python environment snapshots, drift diagnostics, and import-resolution checks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Muhammad Saeed" }]
+keywords = [
+  "python", "developer-tools", "debugging", "environment", "reproducibility",
+  "dependency-diagnostics", "privacy", "cli", "import-resolution", "ci"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Debuggers",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: System :: Monitoring",
+  "Topic :: Utilities",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9",
+  "ruff>=0.11,<1",
+  "mypy>=1.15,<2",
+  "build>=1.2,<2",
+]
+
+[project.scripts]
+envproof = "envproof.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/muhammadsaeed-ai/envproof"
+Repository = "https://github.com/muhammadsaeed-ai/envproof"
+Issues = "https://github.com/muhammadsaeed-ai/envproof/issues"
+Changelog = "https://github.com/muhammadsaeed-ai/envproof/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/envproof"]
+strict = true
+warn_unused_ignores = true

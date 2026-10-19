@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a concrete improvement to EnvProof
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe a real workflow or failure mode.
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed workflow
+      description: Show what the developer would run and what value it should provide.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Existing tools / alternatives
+      description: What have you tried, and where does it fall short?
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Privacy, security and maintenance risks
+      description: Does it collect data, execute commands, add dependencies or alter existing files?
+    validations:
+      required: false
