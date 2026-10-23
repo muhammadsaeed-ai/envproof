@@ -74,7 +74,7 @@ Debugging Python environment issues often means collecting several different fac
 Targets Python 3.10–3.14 in the initial CI matrix; only locally run versions are claimed as verified until CI passes.
 
 ```bash
-git clone https://github.com/muhammadsaeed-ai/envproof.git
+git clone https://github.com/muhammadsaeed-ai/verity-envproof.git
 cd envproof
 python -m venv .venv
 ```
@@ -95,7 +95,7 @@ source .venv/bin/activate
 python -m pip install .
 ```
 
-The public source repository is available at [`muhammadsaeed-ai/envproof`](https://github.com/muhammadsaeed-ai/envproof). EnvProof is **not published on PyPI**; `python -m pip install envproof` becomes the short installation route only after a separate, verified package publication.
+The public source repository is available at [`muhammadsaeed-ai/envproof`](https://github.com/muhammadsaeed-ai/verity-envproof). EnvProof is **not published on PyPI**; `python -m pip install envproof` becomes the short installation route only after a separate, verified package publication.
 
 ### Audit the current environment
 
