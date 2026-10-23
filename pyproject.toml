@@ -45,10 +45,10 @@ dev = [
 envproof = "envproof.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/muhammadsaeed-ai/envproof"
-Repository = "https://github.com/muhammadsaeed-ai/envproof"
-Issues = "https://github.com/muhammadsaeed-ai/envproof/issues"
-Changelog = "https://github.com/muhammadsaeed-ai/envproof/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/muhammadsaeed-ai/verity-envproof"
+Repository = "https://github.com/muhammadsaeed-ai/verity-envproof"
+Issues = "https://github.com/muhammadsaeed-ai/verity-envproof/issues"
+Changelog = "https://github.com/muhammadsaeed-ai/verity-envproof/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]
